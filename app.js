@@ -12,7 +12,7 @@ let brushControls = document.getElementById("brushControls");
 let brushSlider = document.getElementById("brushSize");
 let brushSizeDisplay = document.getElementById("brushSizeDisplay");
 let eraserBtn = document.getElementById("eraserBtn");
-const BACKEND_URL = "htttp://127.0.0.1:8000";
+const BACKEND_URL = "https://eelgrass-labelling-backend.onrender.com";
 
 let user_id, image_id, mode;
 let ctx = canvas.getContext("2d");
