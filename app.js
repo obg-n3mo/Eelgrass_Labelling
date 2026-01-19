@@ -12,6 +12,7 @@ let brushControls = document.getElementById("brushControls");
 let brushSlider = document.getElementById("brushSize");
 let brushSizeDisplay = document.getElementById("brushSizeDisplay");
 let eraserBtn = document.getElementById("eraserBtn");
+const BACKEND_URL = "htttp://127.0.0.1:8000";
 
 let user_id, image_id, mode;
 let ctx = canvas.getContext("2d");
@@ -22,7 +23,7 @@ let eraserOn = false;
 // --- Login ---
 async function login() {
     if (!userInput.value) { alert("Please enter a username."); return; }
-    let r = await fetch("/login", {
+    let r = await fetch(BACKEND_URL + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ user: userInput.value })
@@ -56,7 +57,7 @@ async function loadMode() {
     menuBox.style.display = "none";
     appBox.style.display = "block";
 
-    let r = await fetch("/image");
+    let r = await fetch(BACKEND_URL + "/image");
     let j = await r.json();
     console.log(r);
     console.log(j);
@@ -80,7 +81,7 @@ let currentImageId = null;
 async function loadImage() {
     console.log("Loading new image…");
 
-    const r = await fetch("/next-image");
+    const r = await fetch(BACKEND_URL + "/next-image");
     if (!r.ok) {
         alert("Failed to load image");
         return;
@@ -105,7 +106,7 @@ async function loadImage() {
 
 // --- Answer label ---
 async function answer(ans) {
-    await fetch("/label", {
+    await fetch(BACKEND_URL + "/label", {
         method: "POST",
         body: new URLSearchParams({ user_id, image_id, answer: ans })
     });
@@ -160,7 +161,7 @@ async function submitMask() {
     fd.append("image_id", image_id);
     fd.append("file", blob, "mask.png");
 
-    await fetch("/mask", { method: "POST", body: fd });
+    await fetch(BACKEND_URL + "/mask", { method: "POST", body: fd });
     loadMode();
 }
 
