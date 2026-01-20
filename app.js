@@ -63,7 +63,7 @@ async function loadMode() {
     console.log(j);
     image_id = j.id;
 
-    img.src = `${BACKEND_URL}${j.url}`;
+    img.src = BACKEND_URL + j.url;
     img.onload = () => { if (mode === 'color') initCanvas(); };
 
     applyModeUI();
@@ -93,8 +93,7 @@ async function loadImage() {
 
     // Set image source
     const img = document.getElementById("image");
-    img.src = data.url;
-
+    img.src = BACKEND_URL + data.url;
     // Clear canvas (for colour mode)
     clearCanvas();
 
