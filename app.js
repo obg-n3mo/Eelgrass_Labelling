@@ -63,7 +63,7 @@ async function loadMode() {
     console.log(j);
     image_id = j.id;
 
-    img.src = j.url;
+    img.src = `${BACKEND_URL}${j.url}`;
     img.onload = () => { if (mode === 'color') initCanvas(); };
 
     applyModeUI();
