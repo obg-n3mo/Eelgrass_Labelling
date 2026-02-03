@@ -23,3 +23,43 @@ button {
 .labelButton {
     width: 100px;  
 }
+
+.box {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.welcome-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.project-description {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+#leaderboard {
+    list-style-type: none;
+    padding-left: 20px;
+    max-width: 300px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+#leaderboard li {
+    margin-bottom: 6px;    /* spacing between items */
+}

@@ -7,6 +7,28 @@
 </head>
 <body>
 
+<!-- Welcome screen -->
+
+<div id="welcomeBox" class="box">
+  <h1>Welcome!</h1>
+
+  <div class="welcome-buttons">
+    <button onclick="selectUserType('returning')">Returning user</button>
+    <button onclick="selectUserType('new')">New user</button>
+    <button onclick="openLeaderboard()">View Leaderboard</button>
+  </div>
+
+  <p class="project-description">
+    This project asks volunteers to help identify eelgrass in underwater images.
+    Your responses will be used for scientific research and conservation.
+    <br><br>
+    You can either:
+    <br>• Label images by estimating eelgrass cover
+    <br>• Or colour over eelgrass directly in the image
+  </p>
+</div>
+
+
 <!-- Login screen -->
 <div id="loginBox">
   <input id="user" type="user" placeholder="Username">
@@ -17,7 +39,16 @@
 <div id="menu" style="display:none;">
   <h2>Select Mode</h2>
   <button onclick="mode='label'; loadMode()">Label Images</button>
-  <button onclick="mode='color'; loadMode()">Colour Eelgrass</button>
+  <!--<button onclick="mode='color'; loadMode()">Colour Eelgrass</button>-->
+  <button onclick="openLeaderboard()">Leaderboard</button>
+</div>
+
+<!-- Leaderboard screen -->
+<div id="leaderboardBox" class="box" style="display:none;">
+  <h2>Leaderboard</h2>
+  <ol id="leaderboard"></ol>
+
+  <button onclick="goBackFromLeaderboard()">Back</button>
 </div>
 
 
@@ -28,8 +59,13 @@
   <canvas id="canvas"></canvas>
 
   <div id="buttons">
-    <button onclick="answer('yes')" class="labelButton">Yes</button>
-    <button onclick="answer('no')" class="labelButton">No</button>
+    <button onclick="answer('none')" class="labelButton">None</button>
+    <button onclick="answer('1-10')" class="labelButton">1-10</button>
+    <button onclick="answer('11-20')" class="labelButton">11-20</button>
+    <button onclick="answer('21-40')" class="labelButton">21-40</button>
+    <button onclick="answer('41-60')" class="labelButton">41-60</button>
+    <button onclick="answer('61-80')" class="labelButton">61-80</button>
+    <button onclick="answer('81-100')" class="labelButton">81-100</button>
     <button onclick="answer('unclear')" class="labelButton">Unclear</button>
   </div>
 
