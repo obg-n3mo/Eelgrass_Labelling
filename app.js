@@ -14,7 +14,7 @@ let brushSlider = document.getElementById("brushSize");
 let brushSizeDisplay = document.getElementById("brushSizeDisplay");
 let eraserBtn = document.getElementById("eraserBtn");
 const BACKEND_URL = window.location.hostname.includes("github.io")
-  ? "https://YOUR-BACKEND.onrender.com"
+  ? "https://eelgrass-labelling-backend.onrender.com"
   : "http://127.0.0.1:8000";
 
 let user_id, image_id, mode;
