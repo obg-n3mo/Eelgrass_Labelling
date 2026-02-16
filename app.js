@@ -94,7 +94,7 @@ async function loadMode() {
     menuBox.style.display = "none";
     appBox.style.display = "block";
 
-    let r = await fetch(`${BACKEND_URL}/image/${user_id}`);
+    let r = await fetch(`${BACKEND_URL}/image?user=${user_id}`);
     let j = await r.json();
     console.log(j);
 
