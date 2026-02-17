@@ -75,17 +75,8 @@ async function login() {
 
 // --- Apply mode UI ---
 function applyModeUI() {
-    if (mode === 'label') {
-        questionEl.innerText = "Estimate the percentage of eelgrass cover in this image";
-        buttonsDiv.style.display = "block";
-        submitMaskBtn.style.display = "none";
-        brushControls.style.display = "none";
-    } else {
-        questionEl.innerText = "Colour over all eelgrass in this image";
-        buttonsDiv.style.display = "none";
-        submitMaskBtn.style.display = "inline-block";
-        brushControls.style.display = "block";
-    }
+    questionEl.innerText = "Estimate the percentage of eelgrass cover in this image";
+    buttonsDiv.style.display = "block"; 
 }
  
 
@@ -173,62 +164,10 @@ async function answer(val) {
     loadMode(); // load next image
 }
 
-
-// --- Canvas for coloring ---
-function initCanvas() {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    canvas.style.left = img.offsetLeft + "px";
-    canvas.style.top = img.offsetTop + "px";
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    canvas.onmousedown = () => drawing = true;
-    canvas.onmouseup = () => drawing = false;
-    canvas.onmouseleave = () => drawing = false;
-    canvas.onmousemove = draw;
-}
-
-// --- Drawing function ---
-function draw(e) {
-    if (!drawing) return;
-    let rect = canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-
-    ctx.fillStyle = eraserOn ? "rgba(0,0,0,1)" : "rgba(255, 0, 0, 0.4)";
-    ctx.globalCompositeOperation = eraserOn ? "destination-out" : "source-over";
-
-    ctx.beginPath();
-    ctx.arc(x, y, brushSize, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-
-
-
-
-// --- Submit mask ---
-async function submitMask() {
-    let blob = await new Promise(r => canvas.toBlob(r));
-    let fd = new FormData();
-    fd.append("user_id", user_id);
-    fd.append("image_id", image_id);
-    fd.append("file", blob, "mask.png");
-
-    await fetch(BACKEND_URL + "/mask", { method: "POST", body: fd });
-    loadMode();
-}
-
 // --- Back button ---
 function goBack() {
     appBox.style.display = "none";
     menuBox.style.display = "block";
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    eraserOn = false;
-    eraserBtn.innerText = "Eraser: Off";
-    brushSize = 10;
-    brushSlider.value = 10;
-    brushSizeDisplay.innerText = "10";
 }
 
 function goBackToMenu() {
