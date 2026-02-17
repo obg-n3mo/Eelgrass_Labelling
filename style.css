@@ -76,7 +76,7 @@ button {
 }
 
 #image {
-    max-width: 80%;   /* scale down if too wide */
+    max-width: 50%;   /* scale down if too wide */
     height: auto;     /* keep aspect ratio */
     border: 2px solid #ccc;
     border-radius: 8px;
