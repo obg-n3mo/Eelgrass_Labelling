@@ -3,16 +3,6 @@ body {
     text-align: center;
 }
 
-img {
-    max-width: 500px;
-}
-
-canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
 button {
     padding: 10px 20px;
     margin: 5px;
@@ -49,7 +39,7 @@ button {
 .project-description {
   margin-top: 20px;
   font-size: 14px;
-  color: #444;
+  color: #000000;
 }
 
 #leaderboard {
@@ -78,7 +68,7 @@ button {
 }
 
 
-#labellingImage {
+#image {
     display: block;    /* <-- makes margin auto work if needed */
     margin: 0 auto;    /* center horizontally */
     max-width: 50%;
