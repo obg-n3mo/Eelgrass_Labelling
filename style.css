@@ -67,13 +67,16 @@ button {
 
 .labelling-container {
     display: flex;
-    flex-direction: column;  /* stack image above buttons */
-    align-items: center;     /* center horizontally */
-    justify-content: center; /* center vertically in container */
-    gap: 20px;               /* space between image and buttons */
-    min-height: 80vh;        /* make container tall enough for vertical centering */
-    text-align: center;      /* optional: center text in buttons */
+    flex-direction: column;
+    align-items: center;        /* horizontal centering */
+    justify-content: center;    /* vertical centering */
+    gap: 20px;
+    min-height: 80vh;
+    width: 100%;                /* <-- ensure full width */
+    box-sizing: border-box;     /* include padding in width */
+    text-align: center;
 }
+
 
 #image {
     max-width: 50%;   /* scale down if too wide */
