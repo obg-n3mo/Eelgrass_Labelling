@@ -56,7 +56,7 @@
 <div id="app" class="labelling-container" style="display:none;">
   <h3 id="question"></h3>
   <img id="image" src="" alt="Image to annotate">
-  <canvas id="canvas"></canvas>
+  
 
   <div id="buttons">
     <button onclick="answer('none')" class="labelButton">None</button>
@@ -68,10 +68,14 @@
     <button onclick="answer('81-100')" class="labelButton">81-100</button>
     <button onclick="answer('unclear')" class="labelButton">Unclear</button>
   </div>
-
+  
+  <div id="back_button">
   <button id="backButton" onclick="goBack()">Back</button>
+  </div>
 
+  <div id="guide_image">
   <img id="guide" src="eelgrass_guide.png" alt="Info" />
+  </div>
 </div>
 
 <script src="app.js"></script>
