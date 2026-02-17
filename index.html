@@ -69,15 +69,9 @@
     <button onclick="answer('unclear')" class="labelButton">Unclear</button>
   </div>
 
-  <!-- Brush controls (only for color mode) -->
-  <div id="brushControls" style="display:none; margin-top:10px;">
-    <label>Brush Size: <span id="brushSizeDisplay">10</span></label>
-    <input type="range" id="brushSize" min="2" max="50" value="10">
-    <button id="eraserBtn" onclick="toggleEraser()">Eraser: Off</button>
-  </div>
-
-  <button id="submitMask" onclick="submitMask()">Submit Mask</button>
   <button id="backButton" onclick="goBack()">Back</button>
+
+  <img id="guide" src="eelgrass_guide.png" alt="Info" />
 </div>
 
 <script src="app.js"></script>
