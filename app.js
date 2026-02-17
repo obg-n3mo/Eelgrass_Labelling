@@ -203,16 +203,9 @@ function draw(e) {
     ctx.fill();
 }
 
-// --- Brush controls ---
-brushSlider.oninput = () => {
-    brushSize = parseInt(brushSlider.value);
-    brushSizeDisplay.innerText = brushSize;
-};
 
-function toggleEraser() {
-    eraserOn = !eraserOn;
-    eraserBtn.innerText = `Eraser: ${eraserOn ? "On" : "Off"}`;
-}
+
+
 
 // --- Submit mask ---
 async function submitMask() {
