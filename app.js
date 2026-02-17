@@ -98,13 +98,12 @@ async function loadMode() {
     let j = await r.json();
     console.log(j);
 
-    if (!j.id) {
-        img.src = ""; // hide any previous image
-        questionEl.innerText = j.message || "No images available";
-        buttonsDiv.style.display = "none";
-        submitMaskBtn.style.display = "none";
-        brushControls.style.display = "none";
-        return;
+    if (j.done) {
+        questionEl.innerText = j.message;
+        img.style.display = "none";
+    } else {
+        img.src = j.url;
+        img.style.display = "block";
     }
 
     image_id = j.id;
