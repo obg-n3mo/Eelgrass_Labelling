@@ -63,3 +63,28 @@ button {
 #leaderboard li {
     margin-bottom: 6px;    /* spacing between items */
 }
+
+
+.labelling-container {
+    display: flex;
+    flex-direction: column;  /* stack image above buttons */
+    align-items: center;     /* center horizontally */
+    justify-content: center; /* center vertically in container */
+    gap: 20px;               /* space between image and buttons */
+    min-height: 80vh;        /* make container tall enough for vertical centering */
+    text-align: center;      /* optional: center text in buttons */
+}
+
+#Image {
+    max-width: 80%;   /* scale down if too wide */
+    height: auto;     /* keep aspect ratio */
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+#buttonsDiv button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
