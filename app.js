@@ -18,10 +18,6 @@ const BACKEND_URL = window.location.hostname.includes("github.io")
   : "http://127.0.0.1:8000";
 
 let user_id, image_id, mode;
-let ctx = canvas.getContext("2d");
-let drawing = false;
-let brushSize = 10;
-let eraserOn = false;
 let userType = null;
 let leaderboardBox = document.getElementById("leaderboardBox");
 let lastPage = "welcome";
