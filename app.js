@@ -140,7 +140,7 @@ async function answer(val) {
     let formData = new URLSearchParams();
     formData.append("user_id", user_id);
     formData.append("image_id", image_id);
-    formData.append("answer", val);
+    formData.append("label", val);
 
     let r = await fetch(BACKEND_URL + "/label", {
         method: "POST",
