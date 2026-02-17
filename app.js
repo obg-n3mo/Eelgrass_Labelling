@@ -238,6 +238,11 @@ function goBack() {
     brushSizeDisplay.innerText = "10";
 }
 
+function goBackToMenu() {
+    loginBox.style.display = "none";
+    menuBox.style.display = "block";
+}
+
 // --- Leaderboard ---
 
 async function loadLeaderboard() {
