@@ -240,7 +240,7 @@ function goBack() {
 
 function goBackToMenu() {
     loginBox.style.display = "none";
-    menuBox.style.display = "block";
+    welcomeBox.style.display = "block";
 }
 
 // --- Leaderboard ---
