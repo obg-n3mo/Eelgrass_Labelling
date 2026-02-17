@@ -78,13 +78,15 @@ button {
 }
 
 
-#image {
-    max-width: 50%;   /* scale down if too wide */
-    justify-content: center;
-    height: auto;     /* keep aspect ratio */
+#labellingImage {
+    display: block;    /* <-- makes margin auto work if needed */
+    margin: 0 auto;    /* center horizontally */
+    max-width: 50%;
+    height: auto;
     border: 2px solid #ccc;
     border-radius: 8px;
 }
+
 
 #buttonsDiv button {
     margin: 5px;
