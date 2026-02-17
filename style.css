@@ -75,7 +75,7 @@ button {
     text-align: center;      /* optional: center text in buttons */
 }
 
-#Image {
+#image {
     max-width: 80%;   /* scale down if too wide */
     height: auto;     /* keep aspect ratio */
     border: 2px solid #ccc;
