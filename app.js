@@ -179,8 +179,10 @@ function goBackFromLeaderboard() {
 
 
 // --- Initial UI state ---
-welcomeBox.style.display = "block";
-loginBox.style.display = "none";
-menuBox.style.display = "none";
-appBox.style.display = "none";
+document.addEventListener('DOMContentLoaded', () => {
+    welcomeBox.style.display = "block";
+    loginBox.style.display = "none";
+    menuBox.style.display = "none";
+    appBox.style.display = "none";
+});
 
