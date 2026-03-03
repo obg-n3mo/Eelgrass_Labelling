@@ -9,15 +9,15 @@ let img = document.getElementById("image");
 let canvas = document.getElementById("canvas");
 let buttonsDiv = document.getElementById("buttons");
 
-
-const BACKEND_URL = window.location.hostname.includes("github.io")
-  ? "https://eelgrass-labelling-backend.onrender.com"
-  : "http://127.0.0.1:8000";
-
 let user_id, image_id, mode;
 let userType = null;
 let leaderboardBox = document.getElementById("leaderboardBox");
 let lastPage = "welcome";
+
+const SUPABASE_URL = "https://gyeyhyecebrjcfkmdhsv.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_qvq8DsNdRTQbysajuVJMzw_3UNktRf7";
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 
