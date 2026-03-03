@@ -180,6 +180,12 @@ function goBackFromLeaderboard() {
 
 // --- Initial UI state ---
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('welcomeBox:', welcomeBox);
+    console.log('loginBox:', loginBox);
+    console.log('menuBox:', menuBox);
+    console.log('leaderboardBox:', leaderboardBox);
+    console.log('appBox:', appBox);
+
     welcomeBox.style.display = "block";
     loginBox.style.display = "none";
     menuBox.style.display = "none";
