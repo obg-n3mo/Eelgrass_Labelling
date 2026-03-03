@@ -1,8 +1,8 @@
  // DOM elements
 let welcomeBox = document.getElementById("welcomeBox");
 let loginBox = document.getElementById("loginBox");
-let menuBox = document.getElementById("menu");
-let appBox = document.getElementById("app");
+let menuBox = document.getElementById("menuBox");
+let appBox = document.getElementById("appBox");
 let userInput = document.getElementById("user");
 let questionEl = document.getElementById("question");
 let img = document.getElementById("image");
@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     welcomeBox.style.display = "block";
     loginBox.style.display = "none";
     menuBox.style.display = "none";
+    leaderboardBox.style.display = "none"
     appBox.style.display = "none";
 });
 
