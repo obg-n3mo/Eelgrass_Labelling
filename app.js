@@ -8,11 +8,8 @@ let questionEl = document.getElementById("question");
 let img = document.getElementById("image");
 let canvas = document.getElementById("canvas");
 let buttonsDiv = document.getElementById("buttons");
-let submitMaskBtn = document.getElementById("submitMask");
-let brushControls = document.getElementById("brushControls");
-let brushSlider = document.getElementById("brushSize");
-let brushSizeDisplay = document.getElementById("brushSizeDisplay");
-let eraserBtn = document.getElementById("eraserBtn");
+
+
 const BACKEND_URL = window.location.hostname.includes("github.io")
   ? "https://eelgrass-labelling-backend.onrender.com"
   : "http://127.0.0.1:8000";
@@ -43,36 +40,24 @@ async function login() {
         return;
     }
 
-    let formData = new URLSearchParams();
-    formData.append("user", userInput.value.trim());
-    formData.append("user_type", userType);
+    const username = userInput.value.trim();
 
-    let r = await fetch(BACKEND_URL + "/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-    });
+    const { data, error } = await db
+        .from('users')
+        .upsert({ username }, { onConflict: 'username' })
+        .select()
+        .single();
+    
 
-    if (!r.ok) {
-        let err = await r.json();
-        alert(err.detail || "Login failed");
+    if (error) {
+        alert("Login failed: " + error.message);
         return;
     }
-
-    let j = await r.json();
-    user_id = j.user_id;
+    
+    user_id = user.id;
 
     loginBox.style.display = "none";
     menuBox.style.display = "block";
-}
-
-
-// --- Apply mode UI ---
-function applyModeUI() {
-    questionEl.innerText = "Estimate the percentage of eelgrass cover in this image";
-    buttonsDiv.style.display = "block"; 
 }
  
 
@@ -81,79 +66,41 @@ async function loadMode() {
     menuBox.style.display = "none";
     appBox.style.display = "block";
 
-    let r = await fetch(`${BACKEND_URL}/image?user=${user_id}`);
-    let j = await r.json();
-    console.log(j);
+    const { data: images, error } = await db
+        .rpc('get_unlabelled_image', { p_user_id: user_id });
 
-    if (j.done) {
-        questionEl.innerText = j.message;
-        img.style.display = "none";
-    } else {
-        img.src = j.url;
-        img.style.display = "block";
-    }
-
-    image_id = j.id;
-    img.src = j.url;
-
-    img.onload = () => { if (mode === 'color') initCanvas(); };
-
-    applyModeUI();
-}
-
-// --- Clear canvas ---
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-//--- Load Image ---
-
-let currentImageId = null;
-
-async function loadImage() {
-    console.log("Loading new image…");
-
-    const r = await fetch(BACKEND_URL + "/next-image");
-    if (!r.ok) {
-        alert("Failed to load image");
+    if (error) {
+        console.error('Error loading image:', error);
+        questionEl.innerText = "Something went wrong loading an image. Please try again.";
         return;
     }
 
-    const data = await r.json();
+    if (!images || images.length === 0) {
+        questionEl.innerText = "You've labelled all available images — great work!";
+        img.style.display = "none";
+        buttonsDiv.style.display = "none";
+        return;
+    }
 
-    currentImageId = data.image_id;
+    const image = images[0];
+    image_id = image.id;
+    img.src = image.url;
+    img.style.display = "block";
 
-    // Set image source
-    const img = document.getElementById("image");
-    img.src = BACKEND_URL + data.url;
-    // Clear canvas (for colour mode)
-    clearCanvas();
-
-    // Ensure UI matches mode
-    applyModeUI();
+    questionEl.innerText = "Estimate the percentage of eelgrass cover in this image";
+    buttonsDiv.style.display = "block";
 }
 
 
-
 // --- Answer label ---
-async function answer(val) {
-    let formData = new URLSearchParams();
-    formData.append("user_id", user_id);
-    formData.append("image_id", image_id);
-    formData.append("label", val);
+async function answer(percentCover) {
 
-    let r = await fetch(BACKEND_URL + "/label", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-    });
+    const { error } = await db
+        .from('labels')
+        .insert({ user_id: user_id, image_id: image_id, percent_cover: percentCover });
 
-    if (!r.ok) {
-        let t = await r.text();
-        console.error("Label save failed:", t);
-        alert("Error saving label");
+    if (error) {
+        alert("Failed to save label: " + error.message);
         return;
     }
 
@@ -174,18 +121,36 @@ function goBackToMenu() {
 // --- Leaderboard ---
 
 async function loadLeaderboard() {
-    let r = await fetch(BACKEND_URL + "/leaderboard");
-    let data = await r.json();
+    const { data, error } = await db
+        .from('labels')
+        .select('user_id, users(username)')
+        .order('user_id');
 
-    let list = document.getElementById("leaderboard");
-    list.innerHTML = "";
+    if (error) {
+        console.error('Error loading leaderboard:', error);
+        return;
+    }
 
-    data.forEach((row, i) => {
-        let li = document.createElement("li");
-        // Only use the loop index + 1 for ranking
-        li.innerText = `${i + 1}. ${row.user} — ${row.total}`;
-        list.appendChild(li);
-    });
+    // Count labels per user
+    const counts = {};
+    for (const row of data) {
+        const username = row.users.username;
+        counts[username] = (counts[username] || 0) + 1;
+    }
+
+    // Sort by count descending
+    const sorted = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1]);
+
+    // Render
+    leaderboardBox.innerHTML = sorted
+        .map(([username, count], i) => 
+            `<tr>
+                <td>${i + 1}</td>
+                <td>${username}</td>
+                <td>${count}</td>
+            </tr>`)
+        .join('');
 }
 
 
