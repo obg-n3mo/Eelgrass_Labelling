@@ -178,7 +178,7 @@ async function loadLeaderboard() {
 }
 
 
-function openLeaderboard() {
+async function openLeaderboard() {
     if (welcomeBox.style.display === "block") lastPage = "welcome";
     else if (menuBox.style.display === "block") lastPage = "menu";
 
@@ -187,8 +187,8 @@ function openLeaderboard() {
     loginBox.style.display = "none";
     appBox.style.display = "none";
 
-    leaderboardBox.style.display = "block";
     loadLeaderboard();
+    leaderboardBox.style.display = "block";
 }
 
 function goBackFromLeaderboard() {
