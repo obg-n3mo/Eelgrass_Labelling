@@ -8,6 +8,7 @@ let questionEl = document.getElementById("question");
 let img = document.getElementById("image");
 let canvas = document.getElementById("canvas");
 let buttonsDiv = document.getElementById("buttons");
+const leaderboardEl = document.getElementById('leaderboard');
 
 let user_id, image_id, mode;
 let userType = null;
@@ -167,7 +168,7 @@ async function openLeaderboard() {
         .sort((a, b) => b[1] - a[1]);
 
     // Render
-    leaderboardBox.innerHTML = sorted
+    leaderboardEl.innerHTML = sorted
         .map(([username, count], i) =>
             `<tr>
                 <td>${i + 1}</td>

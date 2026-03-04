@@ -48,10 +48,18 @@
 
 <!-- Leaderboard screen -->
 <div id="leaderboardBox" class="box" style="display:none;">
-  <h2>Leaderboard</h2>
-  <ol id="leaderboard"></ol>
-
-  <button onclick="goBackFromLeaderboard()">Back</button>
+    <h2>Leaderboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Images Labelled</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard"></tbody>
+    </table>
+    <button onclick="goBackFromLeaderboard()">Back</button>
 </div>
 
 
