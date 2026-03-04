@@ -167,7 +167,7 @@ async function openLeaderboard() {
         .sort((a, b) => b[1] - a[1]);
 
     // Render
-    leaderboardEl.innerHTML = sorted
+    leaderboardBox.innerHTML = sorted
         .map(([username, count], i) =>
             `<tr>
                 <td>${i + 1}</td>
