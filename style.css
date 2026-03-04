@@ -42,19 +42,6 @@ button {
   color: #000000;
 }
 
-#leaderboard {
-    list-style-type: none;
-    padding-left: 20px;
-    max-width: 300px;
-    margin: 0 auto;
-    font-family: sans-serif;
-}
-
-#leaderboard li {
-    margin-bottom: 6px;    /* spacing between items */
-}
-
-
 .labelling-container {
     display: flex;
     flex-direction: column;
@@ -101,4 +88,37 @@ button {
     #img, #guideImg {
         max-width: 100%;
     }
+}
+
+#leaderboardBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+}
+
+#leaderboardBox table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+#leaderboardBox th, #leaderboardBox td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#leaderboardBox th {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+#leaderboardBox tr:last-child td {
+    border-bottom: none;
+}
+
+#leaderboardBox tr:hover td {
+    background-color: #f9f9f9;
 }
