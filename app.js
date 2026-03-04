@@ -14,7 +14,7 @@ let userType = null;
 let leaderboardBox = document.getElementById("leaderboardBox");
 let lastPage = "welcome";
 
-const SUPABASE_URL = "https://gyeyhyecebrjcfkmdhsv.supabase.com";
+const SUPABASE_URL = "https://gyeyhyecebrjcfkmdhsv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5ZXloeWVjZWJyamNma21kaHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NTgxMTEsImV4cCI6MjA4ODAzNDExMX0.1LNZC7NcF7HMkMglKpmaSR9h9PaibovglvwwIxGx4WQ";
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); 
@@ -180,12 +180,6 @@ function goBackFromLeaderboard() {
 
 // --- Initial UI state ---
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('welcomeBox:', welcomeBox);
-    console.log('loginBox:', loginBox);
-    console.log('menuBox:', menuBox);
-    console.log('leaderboardBox:', leaderboardBox);
-    console.log('appBox:', appBox);
-
     welcomeBox.style.display = "block";
     loginBox.style.display = "none";
     menuBox.style.display = "none";
