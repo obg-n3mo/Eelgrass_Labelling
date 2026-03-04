@@ -144,11 +144,11 @@ function goBackToMenu() {
 
 // --- Leaderboard ---
 
-async function loadLeaderboard() {
+async function openLeaderboard() {
+    // Fetch data BEFORE showing the box
     const { data, error } = await db
         .from('labels')
-        .select('user_id, users(username)')
-        .order('user_id');
+        .select('user_id, users(username)');
 
     if (error) {
         console.error('Error loading leaderboard:', error);
@@ -167,27 +167,17 @@ async function loadLeaderboard() {
         .sort((a, b) => b[1] - a[1]);
 
     // Render
-    leaderboardBox.innerHTML = sorted
-        .map(([username, count], i) => 
+    leaderboardEl.innerHTML = sorted
+        .map(([username, count], i) =>
             `<tr>
                 <td>${i + 1}</td>
                 <td>${username}</td>
                 <td>${count}</td>
             </tr>`)
         .join('');
-}
 
-
-async function openLeaderboard() {
-    if (welcomeBox.style.display === "block") lastPage = "welcome";
-    else if (menuBox.style.display === "block") lastPage = "menu";
-
-    welcomeBox.style.display = "none";
+    // NOW show the box
     menuBox.style.display = "none";
-    loginBox.style.display = "none";
-    appBox.style.display = "none";
-
-    loadLeaderboard();
     leaderboardBox.style.display = "block";
 }
 
