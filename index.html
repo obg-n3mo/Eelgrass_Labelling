@@ -58,8 +58,11 @@
 <!-- App screen -->
 <div id="appBox" class="labelling-container" style="display:none;">
   <h3 id="question"></h3>
-  <img id="image" src="" alt="Image to annotate">
-  
+
+  <div id="imageContainer">
+    <img id="image" src="" alt="Image to annotate">
+    <img id="guide" src="eelgrass_guide.png" alt="Info" />
+  </div>
 
   <div id="buttons">
     <input type="text" id="coverInput" placeholder="Enter % cover (0-100)">
@@ -67,12 +70,9 @@
   </div>
   
   <div id="back_button">
-  <button id="backButton" onclick="goBack()">Back</button>
+    <button id="backButton" onclick="goBack()">Back</button>
   </div>
 
-  <div id="guide_image">
-  <img id="guide" src="eelgrass_guide.png" alt="Info" />
-  </div>
 </div> 
 
 <script src = "app.js"></script>

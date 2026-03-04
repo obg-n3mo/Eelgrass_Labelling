@@ -68,14 +68,21 @@ button {
 }
 
 
-#image {
-    max-width: 100%;
+#imageContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+#image, #guide {
+    max-width: 48%;
     max-height: 70vh;
     width: auto;
     height: auto;
     object-fit: contain;
-    display: block;
-    margin: 0 auto;
 }
 
 
@@ -84,4 +91,14 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    #imageContainer {
+        flex-direction: column;
+    }
+
+    #img, #guideImg {
+        max-width: 100%;
+    }
 }
