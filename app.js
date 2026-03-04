@@ -41,7 +41,7 @@ async function login() {
         return;
     }
 
-    const username = userInput.value.trim();
+    const username = userInput.value.trim().toLowerCase();
     let data, error;
 
     if (userType === 'new') {
@@ -106,6 +106,8 @@ async function loadMode() {
 
     questionEl.innerText = "Estimate the percentage of eelgrass cover in this image";
     buttonsDiv.style.display = "block";
+
+    document.getElementById('coverInput').focus();
 }
 
 
@@ -193,7 +195,12 @@ function goBackFromLeaderboard() {
 }
 
 
-// --- Initial UI state ---
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && appBox.style.display === 'block') {
+        submitLabel();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     welcomeBox.style.display = "block";
     loginBox.style.display = "none";
