@@ -134,8 +134,9 @@ async function submitLabel() {
     loadMode(); // load next image
 }
 
-// --- Back button ---
+// --- Back buttons ---
 function goBack() {
+    leaderboardBox.style.display = "none"
     appBox.style.display = "none";
     menuBox.style.display = "block";
 }
@@ -147,30 +148,28 @@ function goBackToMenu() {
 
 // --- Leaderboard ---
 
-async function openLeaderboard() {
-    // Fetch data BEFORE showing the box
+async function fetchLeaderboardData() {
     const { data, error } = await db
         .from('labels')
         .select('user_id, users(username)');
 
     if (error) {
         console.error('Error loading leaderboard:', error);
-        return;
+        return [];
     }
 
-    // Count labels per user
     const counts = {};
     for (const row of data) {
         const username = row.users.username;
         counts[username] = (counts[username] || 0) + 1;
     }
 
-    // Sort by count descending
-    const sorted = Object.entries(counts)
-        .sort((a, b) => b[1] - a[1]);
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+}
 
-    // Render
-    leaderboardEl.innerHTML = sorted
+function renderLeaderboard(tbodyId, sorted) {
+    const el = document.getElementById(tbodyId);
+    el.innerHTML = sorted
         .map(([username, count], i) =>
             `<tr>
                 <td>${i + 1}</td>
@@ -178,22 +177,25 @@ async function openLeaderboard() {
                 <td>${count}</td>
             </tr>`)
         .join('');
+}
 
-    // NOW show the box
+async function openLeaderboard() {
+    const sorted = await fetchLeaderboardData();
+    renderLeaderboard('leaderboard', sorted);
+
     menuBox.style.display = "none";
     leaderboardBox.style.display = "block";
 }
 
-function goBackFromLeaderboard() {
-    leaderboardBox.style.display = "none";
-
-    if (lastPage === "welcome") {
-        welcomeBox.style.display = "block";
-    } else {
-        menuBox.style.display = "block";
-    }
+async function loadWelcomeLeaderboard() {
+    const sorted = await fetchLeaderboardData();
+    renderLeaderboard('welcomeLeaderboard', sorted);
 }
 
+// Call on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadWelcomeLeaderboard();
+});
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && appBox.style.display === 'block') {
