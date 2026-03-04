@@ -66,6 +66,8 @@ async function loadMode() {
     menuBox.style.display = "none";
     appBox.style.display = "block";
 
+    console.log('user_id:', user_id, typeof user_id);
+
     const { data: images, error } = await db
         .rpc('get_unlabelled_image', { p_user_id: user_id });
 
