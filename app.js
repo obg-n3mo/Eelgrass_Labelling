@@ -108,18 +108,26 @@ async function loadMode() {
 }
 
 
-// --- Answer label ---
-async function answer(percentCover) {
+// --- Submit label ---
+async function submitLabel() {
+    const coverInput = document.getElementById('coverInput');
+    const value = coverInput.value.trim();
+
+    if (!value) {
+        alert("Please enter a value before submitting.");
+        return;
+    }
 
     const { error } = await db
         .from('labels')
-        .insert({ user_id: user_id, image_id: image_id, percent_cover: percentCover });
+        .insert({ user_id: user_id, image_id: image_id, percent_cover: value });
 
     if (error) {
         alert("Failed to save label: " + error.message);
         return;
     }
 
+    coverInput.value = ''; // clear input for next image
     loadMode(); // load next image
 }
 
