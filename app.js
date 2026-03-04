@@ -41,21 +41,35 @@ async function login() {
     }
 
     const username = userInput.value.trim();
+    let data, error;
 
-    const { data, error } = await db
-        .from('users')
-        .upsert({ username }, { onConflict: 'username' })
-        .select()
-        .single();
-    
+    if (userType === 'new') {
+        // Insert new user
+        ({ data, error } = await db
+            .from('users')
+            .insert({ username })
+            .select()
+            .single());
 
-    if (error) {
-        alert("Login failed: " + error.message);
-        return;
+        if (error) {
+            alert("Username already taken, please choose another.");
+            return;
+        }
+    } else {
+        // Look up existing user
+        ({ data, error } = await db
+            .from('users')
+            .select()
+            .eq('username', username)
+            .single());
+
+        if (error || !data) {
+            alert("Username not found. Please check your username or register as a new user.");
+            return;
+        }
     }
-    
-    user_id = data.id;
 
+    user_id = data.id;
     loginBox.style.display = "none";
     menuBox.style.display = "block";
 }
