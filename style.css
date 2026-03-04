@@ -122,3 +122,29 @@ button {
 #leaderboardBox tr:hover td {
     background-color: #f9f9f9;
 }
+
+#welcomeBox table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    margin: 16px auto;
+}
+
+#welcomeBox th, #welcomeBox td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#welcomeBox th {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+#welcomeBox tr:last-child td {
+    border-bottom: none;
+}
+
+#welcomeBox tr:hover td {
+    background-color: #f9f9f9;
+}
