@@ -54,7 +54,7 @@ async function login() {
         return;
     }
     
-    user_id = user.id;
+    user_id = data.id;
 
     loginBox.style.display = "none";
     menuBox.style.display = "block";
