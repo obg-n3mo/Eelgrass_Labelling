@@ -42,6 +42,12 @@ button {
   color: #000000;
 }
 
+.instructions {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #000000;
+}
+
 .labelling-container {
     display: flex;
     flex-direction: column;
