@@ -151,10 +151,8 @@ function goBackToMenu() {
 async function fetchLeaderboardData() {
     const { data, error } = await db
         .from('labels')
-        .select('user_id, users(username)');
-
-    console.log('leaderboard data:', data);
-    console.log('leaderboard error:', error);
+        .select('user_id, users(username)')
+        .limit(20000);
     
     if (error) {
         console.error('Error loading leaderboard:', error);
