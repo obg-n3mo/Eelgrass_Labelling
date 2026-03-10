@@ -153,6 +153,9 @@ async function fetchLeaderboardData() {
         .from('labels')
         .select('user_id, users(username)');
 
+    console.log('leaderboard data:', data);
+    console.log('leaderboard error:', error);
+    
     if (error) {
         console.error('Error loading leaderboard:', error);
         return [];
