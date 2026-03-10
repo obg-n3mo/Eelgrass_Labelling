@@ -149,10 +149,7 @@ function goBackToMenu() {
 // --- Leaderboard ---
 
 async function fetchLeaderboardData() {
-    const { data, error } = await db
-        .from('labels')
-        .select('user_id, users(username)')
-        .limit(20000);
+    const { data, error } = await db.rpc('get_leaderboard');
     
     if (error) {
         console.error('Error loading leaderboard:', error);
