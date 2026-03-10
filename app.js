@@ -150,19 +150,13 @@ function goBackToMenu() {
 
 async function fetchLeaderboardData() {
     const { data, error } = await db.rpc('get_leaderboard');
-    
+
     if (error) {
         console.error('Error loading leaderboard:', error);
         return [];
     }
 
-    const counts = {};
-    for (const row of data) {
-        const username = row.users.username;
-        counts[username] = (counts[username] || 0) + 1;
-    }
-
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    return data.map(row => [row.username, row.label_count]);
 }
 
 function renderLeaderboard(tbodyId, sorted) {
